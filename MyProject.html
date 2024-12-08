@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Project</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <nav>
+      <div class="left-navbar">
+        <a href="">
+          <img
+            class="web-logo"
+            src="../image/download__1_-removebg-preview.png"
+            alt=""
+          />
+        </a>
+        <ul class="left-links">
+          <li><a href="task_2.html">Home</a></li>
+          <li><a class="link-active" href="My">My Project</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <a href="task-form.html" class="contact-link">Contact me</a>
+      </div>
+    </nav>
+
+    <section class="Project-form">
+
+      <form onsubmit="addBlog(event)">
+        <h1 class="section title">Add My Project</h1>
+        <div class="a">
+          <label for="input-project-name">Project Name</label>
+          <input
+            placeholder="Project Name"
+            type="text"
+            name="input-project-name"
+            id="input-project-name"
+            
+          />
+        </div>
+        <div class="input-date">
+          <div class="start-date">
+            <label for="input-start-date">Start Date</label>
+            <input
+              placeholder=""
+              type="date"
+              name="input-start-date"
+              id="input-start-date"
+              
+            />
+          </div>
+          <div class="end-date">
+            <label for="input-end-date">End Date</label>
+            <input
+              placeholder=""
+              type="date"
+              name="input-end-date"
+              id="input-end-date"
+              
+            />
+          </div>
+        </div>
+
+        <div class="a">
+          <label for="massage">Your Massage</label>
+          <textarea id="massage" name="massage" rows="8" ></textarea>
+        </div>
+
+        <div class="checkbox">
+          <div>
+            <label for="node-js">
+              <input
+                class="bs"
+                type="checkbox"
+                id="node-js"
+                name="node-js"
+                value="lni lni-nodejs"
+              />
+              
+              Node Js</label
+            >
+            <label for="react-js">
+              <input
+                type="checkbox"
+                id="react-js"
+                name="react-js"
+                value="lni lni-react"
+              />
+              React Js</label
+            >
+          </div>
+          <div>
+            <label for="next-js">
+              <input
+                type="checkbox"
+                id="next-js"
+                name="next-js"
+                value="lni lni-nextjs"
+              />
+              Next Js</label
+            >
+            <label for="TypeScript">
+              <input
+                type="checkbox"
+                id="TypeScript"
+                name="TypeScript"
+                value="lni lni-typescript"
+              />
+              TypeScript</label
+            >
+          </div>
+        </div>
+
+        <div class="a">
+          <label for="input-project-image">Upload Image</label>
+          <div class="input-project-image-group">
+            <label for="input-project-image">
+                <p>Attach File</p>
+                <img src="../image/file.png" alt="">
+                </label>
+            <input
+              placeholder="Project image"
+              type="file"
+              name="input-project-image"
+              id="input-project-image"
+              
+              hidden
+            />
+          </div>
+        </div>
+        <div class="button">
+            <button type="submit">Submit</button>
+          </div>
+      </form>
+    </section>
+
+    <section class="project-list">
+        <h1>My Project</h1>
+        
+        <div id="project-list" class="project-flex">
+            <div class="project-card">
+              <div class="card-image">
+                <img src="../image/blog-img.png" alt="">
+                <a href="">Project 1</a>
+                <p>durasi 3 bulan</p>
+              </div>
+              <div>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit maiores ipsa omnis, itaque quaerat atque repudiandae ea, autem quisquam molestias nulla temporibus iure fugit. Quos maiores fuga laboriosam. Sunt, cupiditate?</p>
+              </div>
+              <div class="card-content">
+                <div class="card-icons">
+                  <i class="lni lni-nodejs"></i>
+                  <i class="lni lni-nextjs"></i>
+                  <i class="lni lni-react"></i>
+                  <i class="lni lni-typescript"></i>
+                </div>
+
+                <div class="button-card">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+              </div>
+            </div>
+            
+        </div
+        >
+    </section>
+    <script src="MyProject.js"></script>
+  </body>
+</html>
