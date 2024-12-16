@@ -4,34 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Project</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/CSS/style.css" />
     <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../assets/CSS/bootstrap.min.css">
+    
   </head>
   <body>
-    <nav>
-      <div class="left-navbar">
-        <a href="task-form.html">
+    <nav class="navbar navbar-expand-lg bg-info-subtle">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
           <img
-            class="web-logo"
             src="./assets/download__1_-removebg-preview.png"
-            alt=""
+            alt="Bootstrap"
+            width="70"
           />
         </a>
-        <ul class="left-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a class="link-active" href="MyProject.html">My Project</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <a href="task-form.html" class="contact-link">Contact me</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link fs-5" aria-current="page" href="index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active fw-bold fs-5" href="MyProject.html">My Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-5" href="rating.html"
+                >Testimonial</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <a href="task-form.html" class="btn btn-primary fs-6 fw-bold"
+              >Contact Me</a
+            >
+          </form>
+        </div>
       </div>
     </nav>
 
+
     <section class="Project-form">
 
-      <form onsubmit="addBlog(event)">
+      <form class="form" onsubmit="addBlog(event)">
         <h1 class="section title">Add My Project</h1>
         <div class="a">
           <label for="input-project-name">Project Name</label>
@@ -134,23 +161,29 @@
           </div>
         </div>
         <div class="button">
-            <button type="submit">Submit</button>
+            <button class="btn" type="submit">Submit</button>
           </div>
       </form>
     </section>
 
     <section class="project-list">
         <h1>My Project</h1>
+        <br><br>
+        <h3 id="noPost" style="margin: auto;text-align: center;color: rgb(189, 189, 189); ">Deploy your project</h3>
         
-        <div id="project-list" class="project-flex">
-            <div class="project-card">
+        <div  id="project-list" class="project-flex">
+          <!-- <div class="project-card">
               <div class="card-image">
                 <img src="./assets/blog-img.png" alt="">
                 <a href="">Project 1</a>
                 <p>durasi 3 bulan</p>
+                <p>12 Juli 2024</p>
               </div>
-              <div>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit maiores ipsa omnis, itaque quaerat atque repudiandae ea, autem quisquam molestias nulla temporibus iure fugit. Quos maiores fuga laboriosam. Sunt, cupiditate?</p>
+              <div class="real">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit maiores ipsa omnis, itaque quaerat atque repudiandae ea, autem quisquam molestias nulla temporibus iure fugit. Quos maiores fuga laboriosam. Sunt, cupiditate?
+                  <p class="real-time">1 seconds ago</p>
+                </p>
+
               </div>
               <div class="card-content">
                 <div class="card-icons">
@@ -165,11 +198,13 @@
                     <button>Delete</button>
                 </div>
               </div>
-            </div>
+            </div> -->
             
         </div
         >
     </section>
     <script src="MyProject.js"></script>
+    <script src="navbar.js"></script>
+    <script src="./assets/bootstrap.bundle.min.js"></script>
   </body>
 </html>

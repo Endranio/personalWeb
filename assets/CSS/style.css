@@ -3,53 +3,36 @@
 body{
     margin:0;
     font-family:Poppins;
-}
-
-nav{
-
-    background-color: rgb(207, 240, 240);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding:0 40px;
-    /* margin-bottom:40px; */
-}
-
-nav a{
-    font-size: 20px;
-    text-decoration: none;
-}
-
-.web-logo {
-    width:80px;
-}
-
-.left-navbar{
-    display: flex;
-    align-items:center;
-}
-
-.left-links{
-    display:flex;
-    gap:20px;
-    list-style:none;
 
 }
-
-.contact-link{
-    width:70px;
-    padding :5px 16px;
-    border-radius: 20px;
-    background-color: rgb(77, 19, 249);
-    color: white;
-    border:none;
-    font-weight: 600;
+.nav-link{
+    position:relative
 }
-.link-active{
-    color:rgb(77, 19, 249);
-    font-weight:700;
+.nav-link::after{
+    content:'';
+    opacity: 0;
+    transition: all 0.2s;
+    height:3px;
+    width:100%;
+    background-color: #3498db;
+    position:absolute;
+    bottom:0;
+    left:0;
 }
+.nav-link:hover::after{
+    opacity: 1;
+}
+@media only screen and (max-width: 991px) {
+    
+  
+    ul li:nth-child(1) .nav-link::after{
 
+    width:65px;
+}
+    .nav-link::after{
+        width:100px
+    }
+}
 
 
 
@@ -57,8 +40,8 @@ nav a{
 
 /* HOME PAGE */
 .container-home{
-    padding-top: 50px;
-    height: 100vh;
+    padding: 50px 0;
+    
     background-image: url(https://img.freepik.com/premium-vector/light-blue-geometric-background-design_1035-10037.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -79,7 +62,9 @@ nav a{
 .left{
     width:60%
 }
-
+.teks h1{
+    text-align:left;
+}
 .teks p{
     text-align: justify;
 }
@@ -88,13 +73,14 @@ nav a{
     margin:40px 0px
 }
 
-.contact button{
-    padding:10px 30px;
+ .contact button{
     margin-right:10px;
-    color:white;
-    background-color: rgb(21, 21, 24);
-    border-radius:20px;
-    border:none
+}
+.contact button:hover{
+    background-color: white;
+    color:black;
+    border:black 1px solid;
+
 }
 
 .logo{
@@ -131,7 +117,26 @@ nav a{
 }
 
 
-
+@media only screen and (max-width: 991px) {
+    .flexbox-home {
+    flex-direction: column;
+    align-items: center;
+    }
+    .container-home{
+        height: 195vh;
+    }
+    .left{
+        width:80%
+    }
+    .logo{
+        justify-content: center;
+        margin-bottom:20px;
+    }
+    .image{
+        width:60%;
+       ;
+    }
+  }
 
 
 /* FORM CONTACT */
@@ -153,7 +158,7 @@ align-items: center;
 /* margin:150px auto; */
 }
 
-form{
+.form{
     background:linear-gradient(to bottom, #a8d8ff,#ffffff);
     width:400px;
     /* border:1px solid rgb(91, 91, 244); */
@@ -189,64 +194,25 @@ input,textarea,select{
     justify-content:flex-end
 }
 
-.btn-contact-form{
+/* .btn{
     width:100px;
     padding :5px 21px;
     border-radius: 20px;
     background-color: black;
     color: white;
-    border:none;
+    border:1px solid #3498db;
     font-weight: 700;
 }
-
-/* blog */
-
-
-.blog-form{
-    margin:30px 0;
-    display:flex;
-    justify-content: center;
-}
-
-.input-blog-image{
-    width: 100%;
-    /* height: 40px; */
-}
-.input-blog-image label{
-    display: flex;
-    /* height: 100%; */
-}
-
-hr{
-    width:80%;
-    /* margin-bottom: 20px; */
-}
-
-.blog-container{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.blog-list-item{
-    display: flex;
-    gap:20px
-    
-}
-
-.blog-list{
-    width:80%;
-    
-}
-
-.btn-group{
-    text-align: right;
-}
+.btn:hover{
+    color:#3498db;
+    background-color: white;
+    border:1px solid #3498db
+} */
 
 /* ADD MY PROJECT */
 
 .Project-form{
-    padding: 50px 0;
+    padding: 10px 0;
     height: 100%;
     background-image: url(https://img.freepik.com/premium-vector/light-blue-geometric-background-design_1035-10037.jpg);
     background-repeat: no-repeat;
@@ -347,8 +313,8 @@ width: 85%;
     background-color: #ffffff;
     box-sizing: border-box;
     justify-content: space-between;
+    
 }
-
 
 
 
@@ -362,11 +328,16 @@ width: 85%;
     font-weight:600
 }
 
-.project-card p{
-    margin-bottom:30px;
-    margin-top:0
+.real p{
+    margin:0
+    
 }
 
+.real-time{
+    text-align:right;
+    color: #a2a2a2;
+    margin:0
+}
 .button-card{
     display: flex;
     justify-content: space-between;
@@ -389,4 +360,18 @@ margin-right: 10px;
     font-weight: 700;
 }
 
+/* rating */
+.btn{
+    background-color: #3498db;
+    color:white;
+}
+.btn:hover{
+    border:1px solid black
+}
 
+.card{
+    transition:all 0.3s
+}
+.card:hover{
+    transform: scale(1.1);
+}
