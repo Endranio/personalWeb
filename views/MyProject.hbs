@@ -1,0 +1,51 @@
+{{#> layout title="MyProject"}}
+
+<div class="background-project">
+
+    <section class="project-list">
+
+        <h1 >My Project</h1>
+      
+        <br><br>
+        <p class="text-center"><a href='/my-project-add'class="btn btn-primary ">New Project</a></p>
+        
+        <div  id="project-list" class="project-flex">
+          
+          {{#each project}}
+         <div id="${i}" class="card project-card">
+                  <div class="card-image">
+                    <img src="{{this.image}}" alt="">
+                    <a class="card-name" href="/projectDetail/{{this.id}}">{{this.title}}</a>
+                    <p> <i class="fa-regular fa-clock"></i> Duration : {{duration}}</p>
+                     <p><i class="fa-regular fa-calendar-days"></i> Date : {{Time this.createdAt}}</p>
+                  </div>
+                  <div class="real"><p>{{truncateText this.content}}</p></div>
+
+                  <div class="card-content">
+                  <p class="real-time">{{getRelativeTime this.createdAt}}</p>
+                    <div class="card-icons mt-4">
+                      {{#each this.icons}}
+                      <i class="{{this}}"></i>
+                      {{/each}}
+                    </div>
+    
+                    <div class="button-card">
+                        <a class="btn btn-edit" href="/my-project-edit/{{this.id}}">Edit</a>
+                      <form action="/blog-delete/{{this.id}}?_method=DELETE" method="post">
+
+                        <button class="btn btn-delete" type="submit">Delete</button>
+                        
+                      </form>
+                    </div>
+                  </div>
+        </div>
+        
+        {{else}}
+        <h3 id="noPost" style="margin:100px auto;justify-content:center;grid-area:myArea;color: rgb(189, 189, 189); ">Deploy your project</h3>
+        {{/each}}
+        
+        </div>
+    </section>
+</div>
+    
+   {{/layout}}

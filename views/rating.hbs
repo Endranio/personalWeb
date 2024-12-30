@@ -1,0 +1,29 @@
+{{#> layout title="Rating"}}
+
+  <h2 class="text-center my-5">My Testimonial</h2>
+  <h4 class="text-center mb-3">Rating By Star</h4>
+
+  <div class="container-sm text-center d-flex justify-content-center gap-4">
+    <button type="button" onclick="showAll()" class="btn btn">All</button>
+    <button type="button" onclick="testimonialByStar(1)" class="btn">
+      1 <i class="fas fa-star"></i>
+    </button>
+    <button type="button" onclick="testimonialByStar(2)" class="btn","bton">
+      2 <i class="fas fa-star"></i>
+    </button>
+    <button type="button" onclick="testimonialByStar(3)" class="btn btn">
+      3 <i class="fas fa-star"></i>
+    </button>
+    <button type="button" onclick="testimonialByStar(4)" class="btn btn">
+      4 <i class="fas fa-star"></i>
+    </button>
+    <button type="button" onclick="testimonialByStar(5)" class="btn btn">
+      5 <i class="fas fa-star"></i>
+    </button>
+  </div>
+
+  <div id="cardContainer" class="container-fluid mx-auto row row-cols-md-3 my-5 w-75 ">
+    <p>no testimonial</p>
+  </div>
+
+ {{/layout}}

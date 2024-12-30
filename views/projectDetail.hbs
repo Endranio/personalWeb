@@ -1,0 +1,31 @@
+{{#> layout title ="Detail"}}
+
+<div class="container-detail">
+  <div class="flex-detail">
+    <div class="image-detail">
+      <img src="{{data.image}}" alt="" />
+    </div>
+    <div class="content-detail">
+      <div class="detail-left">
+        <h2>{{data.title}}</h2>
+        <p><i class="fa-regular fa-clock"></i> {{data.start}} - {{data.end}}</p>
+        <p> <i class="fa-regular fa-clock"></i> Duration: {{data.duration}}</p>
+        <p> <i class="fa-regular fa-calendar-days"></i> Date: {{Time data.createdAt}}</p>
+        <p style="color:rgb(160, 156, 156)">{{getRelativeTime data.createdAt}}</p>
+        {{#each data.icons}}
+        <i class="{{this}}" style="font-size: 30px;"></i>
+        {{/each}}
+        
+
+      </div>
+
+      <div class="detail-right">
+        <p>
+          {{data.content}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/layout}}

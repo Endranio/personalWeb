@@ -1,0 +1,121 @@
+{{#> layout title="Edit Project"}}
+
+
+    <section class="Project-form">
+
+      <form action="/project-update/{{data.id}}?_method=PATCH" method="post" class="form">
+        <h1 class="section title">Edit Project</h1>
+        <div class="a">
+          <label for="title">Project Name</label>
+          <input
+            placeholder="Project Name"
+            type="text"
+            name="title"
+            id="title"
+            value="{{data.title}}"
+            
+          /> 
+        </div>
+        <div class="input-date">
+          <div class="start-date">
+            <label for="start">Start Date</label>
+            <input
+              placeholder=""
+              type="date"
+              name="start"
+              id="start"
+              value="{{data.start}}"
+              
+            />
+          </div>
+          <div class="end-date">
+            <label for="end">End Date</label>
+            <input
+              placeholder=""
+              type="date"
+              name="end"
+              id="end"
+              value="{{data.end}}"
+            />
+          </div>
+        </div>
+
+        <div class="a">
+          <label for="content">Your Massage</label>
+          <textarea id="content" name="content" rows="8">{{data.content}}</textarea>
+        </div>
+
+        <div class="checkbox">
+          <div>
+            <label for="node-js">
+              <input
+                class="bs"
+                type="checkbox"
+                id="node-js"
+                name="icon"
+                value="lni lni-nodejs"
+                {{isChecked "lni lni-nodejs" data.icons}}
+                
+              />
+              
+              Node Js</label
+            >
+            <label for="react-js">
+              <input
+                type="checkbox"
+                id="react-js"
+                name="icon"
+                value="lni lni-react"
+                {{isChecked "lni lni-react" data.icons}}
+                
+              />
+              React Js</label
+            >
+          </div>
+          <div>
+            <label for="next-js">
+              <input
+                type="checkbox"
+                id="next-js"
+                name="icon"
+                value="lni lni-nextjs"
+                {{isChecked "lni lni-nextjs" data.icons}}
+              />
+              Next Js</label
+            >
+            <label for="TypeScript">
+              <input
+                type="checkbox"
+                id="TypeScript"
+                name="icon"
+                value="lni lni-typescript"
+                {{isChecked "lni lni-typescript" data.icons}}
+              />
+              TypeScript</label
+            >
+          </div>
+        </div>
+
+        <div class="a">
+          <label for="input-project-image">Upload Image</label>
+          <div class="input-project-image-group">
+            <label for="input-project-image">
+                <p>Attach File</p>
+                <img src="../assets/img/file.png" alt="">
+                </label>
+            <input
+              placeholder="Project image"
+              type="file"
+              name="input-project-image"
+              id="input-project-image"
+              
+              hidden
+            />
+          </div>
+        </div>
+        <div class="button">
+            <button class="btn" type="submit">Save</button>
+          </div>
+      </form>
+    </section>
+    {{/layout}}

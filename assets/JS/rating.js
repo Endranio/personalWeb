@@ -39,7 +39,7 @@ const cardHTML = (daftarCard) => {return daftarCard
     (card) => `
   <div class="d-flex justify-content-center my-3">
         <div class="card shadow col p-3" style="width: 18rem">
-          <img src="./assets/${card.image}" class="card-img-top" style="height:200px" alt="..." />
+          <img src="assets/img/${card.image}" class="card-img-top" style="height:200px" alt="..." />
           <div class="card-body px-0">
             <div class="overflow-auto" style="height: 80px">
               <p>

@@ -1,0 +1,63 @@
+{{#> layout title="Form"}}
+
+    <div class="hero-image">
+      <div class="main">
+        <form class="form" id="contactForm" action="">
+          <h1>Get In Touch</h1>
+          <div class="a">
+            <label for="name">Name</label>
+
+            <input
+              placeholder="name"
+              type="text"
+              name="name"
+              id="name"
+              required
+            />
+          </div>
+
+          <div class="a">
+            <label for="email">Email</label>
+            <input
+              placeholder="email"
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+
+          <div class="a">
+            <label for="phoneNumber" required="">Phone Number</label>
+            <input
+              placeholder="phone number"
+              type="number"
+              id="phoneNumber"
+              name="phoneNumber"
+              required
+            />
+          </div>
+
+          <div class="a">
+            <label for="Subject">Subject</label>
+            <select name="Subject" id="Subject" required>
+              <option value=""></option>
+              <option value="frontend">frontend</option>
+              <option value="backend">backend</option>
+            </select>
+          </div>
+
+          <div class="a">
+            <label for="massage">Your Massage</label>
+            <textarea id="massage" name="massage" required></textarea>
+          </div>
+
+          <div class="button">
+            <button class="btn" type="submit">submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+    {{/layout}}

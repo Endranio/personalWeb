@@ -54,7 +54,7 @@ function renderBlog() {
     for(let i = 0; i < project.length; i++){
       let formatedDate = Time(project[i].posteAdt)
         console.log(project[i])
-       
+      
         ProjectListElement.innerHTML +=`
          <div class="card project-card">
                   <div class="card-image">
