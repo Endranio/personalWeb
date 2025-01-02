@@ -39,6 +39,14 @@ function Time(date) {
     if(diffInMinutes < 60){
       return`${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""} ago`
     }
+    let diffInHours = Math.floor(diffInMinutes/60)
+    if(diffInHours < 24){
+      return`${diffInHours} hour${diffInHours > 1 ? "s" : ""} ago`
+    }
+    let diffInDays = Math.floor(diffInHours/24)
+    if(diffInDays < 30){
+      return`${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`
+    }
   }
 
   module.exports={
