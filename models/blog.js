@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     start:DataTypes.DATE,
     end:DataTypes.DATE,
     duration:DataTypes.STRING,
-    // icons:DataTypes.ARRAY(DataTypes.STRNG),
+    icons:DataTypes.ARRAY(DataTypes.STRING),
      
     
   }, {

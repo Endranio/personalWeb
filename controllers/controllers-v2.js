@@ -1,43 +1,97 @@
 const { Sequelize, QueryTypes, where } = require("sequelize");
+const bcrypt = require('bcrypt')
 const config = require("../config/config.json");
-const { Blog } = require("../models");
+const { Blog,User } = require("../models");
 const sequelize = new Sequelize(config.development);
+const saltRounds = 10
+
+
 
 function renderHome(req, res) {
-  res.render("index", { isHome: true });
+
+  const user = req.session.user
+  
+  res.render("index", {user, isHome: true }); 
 }
+
 function renderContact(req, res) {
   res.render("task-form");
+}
+function renderLogin(req, res) {
+  res.render("auth-login");
 }
 function renderRegister(req, res) {
   res.render("auth-register");
 }
 
-function authRegister(req,res) {
+async function authRegister(req,res) {
   const {username,email,password} = req.body
-  console.log('authRegister const:',req.body)
+  
+  const hashedPassword = await bcrypt.hash(password,saltRounds)
 
-  res.redirect("/register")
+  const user = await User.create({username,email,password:hashedPassword})
+  
+  res.redirect("/login")
 }
 
+async function authLogin(req,res){
+  const{email,password}=req.body
+  
+  const user = await User.findOne({where:{email:email}})
+  
+  
+  if(!user){
+    return res.render("page-404")
+  }
+  
+  const isValidated = await bcrypt.compare(password,user.password)
+  
+  if(!isValidated){
+    return res.render("page-404")
+  }
+  
+  let loggedInUser = user.toJSON();
+
+  delete loggedInUser.password;
+console.log('setelah delete:',loggedInUser)
+
+  req.session.user = loggedInUser;
+  
+  res.redirect("/index")
+}
+
+function authLogout(req,res){
+
+  req.session.user=null
+
+  res.redirect("/login")
+}
+
+
 async function renderProject(req, res) {
+
+  const {user} = req.session
   const project = await Blog.findAll({
     order: [["createdAt", "DESC"]],
   });
   console.log(project);
 
-  res.render("MyProject", { project: project, isMyProject: true });
+  res.render("MyProject", { project: project,user, isMyProject: true });
 }
 async function renderProjectDetail(req, res) {
   const { id } = req.params;
 
   const projectDetail = await Blog.findOne({ where: { id: id } });
-
-  if (projectDetail === null) {
+  const formattedData = {
+    ...projectDetail.dataValues,
+    start: new Date(projectDetail.start).toISOString().split("T")[0],
+    end: new Date(projectDetail.end).toISOString().split("T")[0],
+  };
+  if (formattedData === null) {
     res.send("page-404");
   } else {
-    console.log("projectDetailnya:", projectDetail);
-    res.render("projectDetail", { data: projectDetail });
+  
+    res.render("projectDetail", { data: formattedData });
   }
 }
 
@@ -45,11 +99,11 @@ async function addProject(req, res) {
   console.log("form submited");
 
   const { title, content, start, end, icon } = req.body;
+  console.log("ini body:",req.body)
   const blind = {};
   blind["title"] = title;
   blind["content"] = content;
   const icons = Array.isArray(icon) ? icon : [icon];
-  const formattedIcons = `{${icons.join(",")}}`;
   let durationInMonth = Math.floor(
     (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24 * 30)
   );
@@ -61,7 +115,7 @@ async function addProject(req, res) {
     duration = `${durationInMonth} Month${durationInMonth > 1 ? "s" : ""} `;
   } else {
     duration = `${durationInDay} Day${durationInDay > 1 ? "s" : ""}`;
-  }
+  } 
 
   const image = "https://picsum.photos/200/300";
 
@@ -72,7 +126,7 @@ async function addProject(req, res) {
     start,
     end,
     duration,
-    icon: formattedIcons,
+    icons: icons
   });
 
   console.log("user createddddddddddd:", result);
@@ -81,7 +135,7 @@ async function addProject(req, res) {
 }
 
 // RATING
-function renderRating(req, res) {
+function renderRating(req, res) { 
   res.render("rating", { isRating: true });
 }
 
@@ -94,7 +148,6 @@ async function updateProject(req, res) {
   const { id } = req.params;
   const { title, content, start, end, icon } = req.body;
   const icons = Array.isArray(icon) ? icon : [icon];
-  const formattedIcons = `{${icons.join(",")}}`;
   let durationInMonth = Math.floor(
     (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24 * 30)
   );
@@ -118,7 +171,7 @@ async function updateProject(req, res) {
       start: start,
       end: end,
       duration: duration,
-      icons: formattedIcons, 
+      icons: icons, 
       updatedAt: sequelize.fn("NOW "),
     },
     {
@@ -134,32 +187,35 @@ async function renderMyProjectEdit(req, res) {
   const { id } = req.params;
 
   const dataToEdit = await Blog.findOne({ where: { id:id } });
-  // const formattedData = {
-  //   ...dataToEdit,
-  //   title: dataToEdit.title,
-  //   content: dataToEdit.content,
-  //   start: new Date(dataToEdit.start).toISOString().split("T")[0],
-  //   end: new Date(dataToEdit.end).toISOString().split("T")[0],
-  // };
-  console.log("ini data edittt:", dataToEdit);
-  res.render("my-project-edit", { data: dataToEdit });
+  const formattedData = {
+    ...dataToEdit.dataValues,
+    start: new Date(dataToEdit.start).toISOString().split("T")[0],
+    end: new Date(dataToEdit.end).toISOString().split("T")[0],
+  };
+  
+  res.render("my-project-edit", { data: formattedData });
 }
 
-function isChecked(value, array) {
-  return array && array.includes(value) ? "checked" : "";
-}
 
 async function deleteProject(req, res) {
   const { id } = req.params;
 
   const result = await Blog.destroy({ where: { id } });
-
+  
   console.log(result);
   res.redirect("/MyProject");
+  
 }
 
+function isChecked(value, array) {
+  return array && array.includes(value) ? "checked" : "";
+}
 module.exports = {
+
   renderRegister,
+  renderLogin,
+  authLogin,
+  authLogout,
   authRegister,
   renderHome,
   renderContact,

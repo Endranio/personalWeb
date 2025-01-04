@@ -35,9 +35,17 @@
           <a class="nav-link fs-5  {{#if isRating}} active {{/if}}"  href="/rating">Testimonial</a>
         </li>
       </ul>
-      <form class="d-flex" role="search" style="margin: 0">
+     <div style="display: flex; justify-content:end; width:50%; align-items:center;gap:20px">
+      {{#if user}}
+      Hello,{{user.username}}
+        <a href="/logout" class="nav-link fs-5">Logout</a>
+      {{else}}
+        <a href="/login" class="nav-link fs-5">Login</a>
+        <a href="/register" class="nav-link fs-5">Register</a>
+      {{/if}}
         <a href="/task-form" class="btn btn-primary fs-6 fw-bold ">Contact Me</a>
-      </form>
+     </div>
+      
     </div>
   </div>
 </nav>

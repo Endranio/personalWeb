@@ -26,6 +26,7 @@ function Time(date) {
     return formatedDate
   }
   
+  
   function getRelativeTime(targetDate){
     let now = new Date()
     let diffInSeconds = Math.floor((now - targetDate) / 1000)
@@ -50,5 +51,5 @@ function Time(date) {
   }
 
   module.exports={
-   Time,getRelativeTime,
+   Time,getRelativeTime
   }
