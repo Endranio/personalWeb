@@ -15,7 +15,8 @@ function renderHome(req, res) {
 }
 
 function renderContact(req, res) {
-  res.render("task-form");
+  const {user} = req.session
+  res.render("task-form",{user});
 }
 function renderLogin(req, res) {
   res.render("auth-login");
@@ -41,7 +42,8 @@ async function authLogin(req,res){
   
   
   if(!user){
-    return res.render("page-404")
+    req.flash("error","user tidak ditemukan")
+   return res.redirect("/login")
   }
   
   const isValidated = await bcrypt.compare(password,user.password)
@@ -79,20 +81,22 @@ async function renderProject(req, res) {
   res.render("MyProject", { project: project,user, isMyProject: true });
 }
 async function renderProjectDetail(req, res) {
+  const {user} = req.session
   const { id } = req.params;
 
   const projectDetail = await Blog.findOne({ where: { id: id } });
+  if (!projectDetail) {
+     return res.render("page-404");
+  } 
+
   const formattedData = {
-    ...projectDetail.dataValues,
+    ...projectDetail.dataValues, 
     start: new Date(projectDetail.start).toISOString().split("T")[0],
     end: new Date(projectDetail.end).toISOString().split("T")[0],
   };
-  if (formattedData === null) {
-    res.send("page-404");
-  } else {
   
-    res.render("projectDetail", { data: formattedData });
-  }
+    res.render("projectDetail", { data: formattedData,user });
+  
 }
 
 async function addProject(req, res) {
@@ -129,18 +133,23 @@ async function addProject(req, res) {
     icons: icons
   });
 
-  console.log("user createddddddddddd:", result);
 
   res.redirect("/MyProject");
 }
 
 // RATING
 function renderRating(req, res) { 
-  res.render("rating", { isRating: true });
+  const {user} = req.session
+  res.render("rating", { isRating: true,user });
+}
+function render404(req, res) { 
+  const {user} = req.session
+  res.render("/page-404",{user});
 }
 
 function renderMyProjectAdd(req, res) {
-  res.render("my-project-add");
+  const {user} =req.session
+  res.render("my-project-add",{user});
 }
 
 async function updateProject(req, res) {
@@ -179,14 +188,15 @@ async function updateProject(req, res) {
     }
   );
 
-  console.log('hasil darisequelize update:',result);
 
   res.redirect("/MyProject");
 } 
 async function renderMyProjectEdit(req, res) {  
   const { id } = req.params;
-
   const dataToEdit = await Blog.findOne({ where: { id:id } });
+if (!dataToEdit){
+  return res.render("page-404")
+}
   const formattedData = {
     ...dataToEdit.dataValues,
     start: new Date(dataToEdit.start).toISOString().split("T")[0],
@@ -207,9 +217,9 @@ async function deleteProject(req, res) {
   
 }
 
-function isChecked(value, array) {
-  return array && array.includes(value) ? "checked" : "";
-}
+
+
+
 module.exports = {
 
   renderRegister,
@@ -227,5 +237,6 @@ module.exports = {
   deleteProject,
   updateProject,
   renderProjectDetail,
-  isChecked,
+  render404,
+  
 };
