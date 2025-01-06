@@ -1,13 +1,13 @@
-const Swal = require("sweetalert2")
+const Swal = require("sweetalert2");
 
-function sendAlert(title,message){
+function sendAlert(type,massage) {
     Swal.fire({
         title: "Oops!",
-        text: message,
-        icon: "success"
+        text: massage,
+        icon: type
       });
 }
 
 module.exports = {
-    sendAlert
-}
+  sendAlert,
+};
