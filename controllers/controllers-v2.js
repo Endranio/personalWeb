@@ -42,7 +42,7 @@ async function authLogin(req,res){
   
   
   if(!user){
-    req.flash('messages',{error:"user tidak ditemukan"})
+    req.flash("error","user tidak ditemukan")
    return res.redirect("/login")
   }
   

@@ -30,6 +30,7 @@ const {isChecked}= require("./utils/checkbox");
 const { sendAlert } = require("./assets/JS/sw2");
 
 
+
 const app = express();
 const port = process.env.SERVER_PORT;
 
@@ -48,15 +49,18 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use("/assets", express.static(path.join(__dirname, "/assets")));
 app.use(methodOverride("_method"));
+
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "./views"));
+
 
 hbs.registerPartials(__dirname + "/views/partials", function (err) {});
 hbs.registerHelper("Time", Time);
 hbs.registerHelper("truncateText", truncateText);
 hbs.registerHelper("getRelativeTime", getRelativeTime);
 hbs.registerHelper("isChecked", isChecked);
-hbs.registerHelper("sendAlert",sendAlert)
+
+sendAlert()
 
 app.get("/index", renderHome);
 app.get("/register", renderRegister);

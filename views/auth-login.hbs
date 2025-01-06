@@ -2,7 +2,7 @@
 
 {{#if messages.error}}
 <script>
-  sendAlert('error','{{messages.error}}')
+  {{sweetalert2 "error" messages.error}}
 </script>
 {{/if}}
 

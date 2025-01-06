@@ -1,11 +1,17 @@
-const Swal = require("sweetalert2");
+const hbs= require("hbs");
 
-function sendAlert(type,massage) {
-    Swal.fire({
-        title: "Oops!",
-        text: massage,
-        icon: type
-      });
+function sendAlert() {
+  hbs.registerHelper("sweetAlert", (type, message) => {
+    return hbs.safeString(`
+    <script>
+            Swal.fire({
+  title: "Oops!",
+  text: '${message}',
+  icon: "${type}"
+});
+</script>
+`);
+  });
 }
 
 module.exports = {
