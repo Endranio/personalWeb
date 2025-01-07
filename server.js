@@ -27,7 +27,7 @@ const {
 const { Time, getRelativeTime} = require("./utils/time");
 const { truncateText } = require("./utils/text");
 const {isChecked}= require("./utils/checkbox");
-const { sendAlert } = require("./assets/JS/sw2");
+//  const { sendAlert } = require("./assets/JS/sw2");
 
 
 
@@ -59,8 +59,11 @@ hbs.registerHelper("Time", Time);
 hbs.registerHelper("truncateText", truncateText);
 hbs.registerHelper("getRelativeTime", getRelativeTime);
 hbs.registerHelper("isChecked", isChecked);
+hbs.registerHelper("equal", function (a, b) {
+  return a === b;
+});
+// hbs.registerHelper("sendAlert",sendAlert)
 
-sendAlert()
 
 app.get("/index", renderHome);
 app.get("/register", renderRegister);

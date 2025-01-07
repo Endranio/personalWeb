@@ -37,5 +37,17 @@
       </div>
     </div>
   </div>
+
+  <script>
+const success = "{{messages.success}}"
+if(success){
+
+   Swal.fire({
+            title: "Success!",
+            text: success,
+            icon: "success"
+            });
+}
+</script>
  
 {{/layout}}
