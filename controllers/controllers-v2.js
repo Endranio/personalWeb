@@ -68,7 +68,7 @@ async function authLogin(req, res) {
 
   req.session.user = loggedInUser;
   req.flash("message", {
-    text:"login successful",
+    text:"you are logged in",
     icon:"success",
     title:"success"}
   );
@@ -78,7 +78,7 @@ async function authLogin(req, res) {
 function authLogout(req, res) {
   req.session.user = null;
   req.flash("message", {
-    text:"registration successful",
+    text:"now you are logged out",
     icon:"success",
     title:"success"}
   );
@@ -87,6 +87,10 @@ function authLogout(req, res) {
 
 async function renderProject(req, res) {
   const { user } = req.session;
+  const messages = {
+    message: req.flash("message") || [], // Pesan notifikasi/error
+    option: req.flash("option") || [],  // Pesan konfirmasi
+  };
   const project = await Blog.findAll({
     include: {
       model: User,
@@ -96,7 +100,7 @@ async function renderProject(req, res) {
     order: [["createdAt", "DESC"]],
   });
 
-  res.render("MyProject", { project: project, user, isMyProject: true });
+  res.render("MyProject", { project: project, user, isMyProject: true,messages });
 }
 async function renderProjectDetail(req, res) {
   const { user } = req.session;
@@ -179,6 +183,7 @@ function renderMyProjectAdd(req, res) {
 async function updateProject(req, res) {
   console.log("form submited");
   const { id } = req.params;
+  const{user} = req.session
   const { title, content, start, end, icon } = req.body;
   const icons = Array.isArray(icon) ? icon : [icon];
   let durationInMonth = Math.floor(
@@ -195,8 +200,9 @@ async function updateProject(req, res) {
   }
 
   const image = "https://picsum.photos/200/300";
+  
 
-  const result = await Blog.update(
+   await Blog.update(
     {
       title: title,
       content: content,
@@ -218,9 +224,16 @@ async function renderMyProjectEdit(req, res) {
   const { id } = req.params;
   const { user } = req.session;
   const dataToEdit = await Blog.findOne({ where: { id: id } });
-  if (!dataToEdit) {
-    return res.render("page-404");
+  if ( !user||dataToEdit.user_id !== user.id){
+    req.flash("message", {
+      title: "Access Denied",
+      text: "You are not the project owner.",
+      icon: "error",
+  });
+  
+  return res.redirect("/Myproject")
   }
+
   const formattedData = {
     ...dataToEdit.dataValues,
     start: new Date(dataToEdit.start).toISOString().split("T")[0],
@@ -232,11 +245,26 @@ async function renderMyProjectEdit(req, res) {
 
 async function deleteProject(req, res) {
   const { id } = req.params;
+  const {user} = req.session
 
-  const result = await Blog.destroy({ where: { id } });
+  const result = await Blog.findOne({ where: { id } });
+  
+  if ( !user||result.user_id !== user.id){
+    req.flash("message", {
+      title: "Access Denied",
+      text: "You are not the project owner.",
+      icon: "error",
+  });
+  return res.redirect("/Myproject")
+  }
 
-  console.log(result);
-  res.redirect("/MyProject");
+  
+  req.flash("option",{
+    text:"You won't be able to revert this!"
+  })
+  await Blog.destroy({ where: { id } })
+  
+  return res.redirect("/MyProject");
 }
 
 module.exports = {

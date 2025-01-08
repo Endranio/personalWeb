@@ -27,7 +27,7 @@ const {
 const { Time, getRelativeTime} = require("./utils/time");
 const { truncateText } = require("./utils/text");
 const {isChecked}= require("./utils/checkbox");
- const { sendAlert } = require("./assets/JS/sw2");
+ const { sendAlert,sendAlertOption } = require("./assets/JS/sw2");
 
 
 
@@ -65,6 +65,9 @@ hbs.registerHelper("equal", function (a, b) {
 });
 hbs.registerHelper("sendAlert", (messages) => {
   return new hbs.SafeString(sendAlert(messages));
+});
+hbs.registerHelper("sendAlertOption", (messages) => {
+  return new hbs.SafeString(sendAlertOption(messages));
 });
 
 

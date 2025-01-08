@@ -1,7 +1,10 @@
 {{#> layout title="MyProject"  user=user}}
-{{!-- {{#if sendAlert}} --}}
+{{#if messages.message}}
 {{{sendAlert messages}}}
-{{!-- {{/if}} --}}
+{{/if}}
+{{#if messages.option}}
+{{{sendAlertOption option}}}
+{{/if}}
 
 <div class="background-project">
 
@@ -35,12 +38,12 @@
                     </div>
     
                     <div class="button-card">
-                     {{#if (equal ../user.id this.user_id)}}
+                     
                         <a class="btn btn-edit" href="/my-project-edit/{{this.id}}">Edit</a>
+                        
                       <form action="/blog-delete/{{this.id}}?_method=DELETE" method="post">
-                        <button class="btn btn-delete" type="submit">Delete</button>
+                        <button class="btn btn-delete" type="button" onclick="confirmDelete">Delete</button>
                       </form>
-                      {{/if}}
                     </div>
                   </div>
         </div>
