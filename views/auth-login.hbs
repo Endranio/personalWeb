@@ -1,10 +1,8 @@
 {{#> layout title="login"}}
+{{!-- {{#if sendAlert}} --}}
+{{{sendAlert messages}}}
+{{!-- {{/if}} --}}
 
-{{!-- {{#if messages}}
-
-  {{{sendAlert "error" messages.error}}}
-
-{{/if}} --}}
 
 <section class="Project-form">
 
@@ -25,26 +23,7 @@
   </form>
 </section> 
 
-<script>
-const errorMessage = "{{messages.error}}"
-if(errorMessage){
 
-   Swal.fire({
-            title: "Oops!",
-            text: errorMessage,
-            icon: "error"
-            });
-}
-const success = "{{messages.success}}"
-if(success){
-
-   Swal.fire({
-            title: "Success!",
-            text: success,
-            icon: "success"
-            });
-}
-</script>
     
 
 

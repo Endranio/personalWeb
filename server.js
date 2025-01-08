@@ -27,7 +27,7 @@ const {
 const { Time, getRelativeTime} = require("./utils/time");
 const { truncateText } = require("./utils/text");
 const {isChecked}= require("./utils/checkbox");
-//  const { sendAlert } = require("./assets/JS/sw2");
+ const { sendAlert } = require("./assets/JS/sw2");
 
 
 
@@ -50,6 +50,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/assets", express.static(path.join(__dirname, "/assets")));
 app.use(methodOverride("_method"));
 
+
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "./views"));
 
@@ -62,7 +63,9 @@ hbs.registerHelper("isChecked", isChecked);
 hbs.registerHelper("equal", function (a, b) {
   return a === b;
 });
-// hbs.registerHelper("sendAlert",sendAlert)
+hbs.registerHelper("sendAlert", (messages) => {
+  return new hbs.SafeString(sendAlert(messages));
+});
 
 
 app.get("/index", renderHome);

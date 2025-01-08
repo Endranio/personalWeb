@@ -1,4 +1,5 @@
 {{#> layout title="Home" user=user}}
+{{{sendAlert messages}}}
   <div class="container-home">
     <div class="flexbox-home">
       <div class="left">
@@ -38,16 +39,6 @@
     </div>
   </div>
 
-  <script>
-const success = "{{messages.success}}"
-if(success){
-
-   Swal.fire({
-            title: "Success!",
-            text: success,
-            icon: "success"
-            });
-}
-</script>
+  
  
 {{/layout}}

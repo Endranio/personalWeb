@@ -28,7 +28,11 @@ async function authRegister(req, res) {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const user = await User.create({ username, email, password: hashedPassword });
-  req.flash("success", "berhasil register");
+  req.flash("message", {
+    text:"registration successful",
+    icon:"success",
+    title:"success"}
+  );
   res.redirect("/login");
 }
 
@@ -38,14 +42,22 @@ async function authLogin(req, res) {
   const user = await User.findOne({ where: { email: email } });
 
   if (!user) {
-    req.flash("error", "user tidak ditemukan");
-    return res.redirect("/login");
+    req.flash("message", {
+      text:"user tidak ditemukan",
+      icon:"error",
+      title:"Oops"}
+    );
+
+    return res.redirect("/login",);
   }
 
   const isValidated = await bcrypt.compare(password, user.password);
 
   if (!isValidated) {
-    req.flash("error", "password salah");
+    req.flash("message", {
+      text:"password salah",
+      icon:"error",
+      title:"Oops"})
     return res.redirect("/login");
   }
 
@@ -55,13 +67,21 @@ async function authLogin(req, res) {
   console.log("setelah delete:", loggedInUser);
 
   req.session.user = loggedInUser;
-  req.flash("success", "berhasil login");
+  req.flash("message", {
+    text:"login successful",
+    icon:"success",
+    title:"success"}
+  );
   res.redirect("/index");
 }
 
 function authLogout(req, res) {
   req.session.user = null;
-
+  req.flash("message", {
+    text:"registration successful",
+    icon:"success",
+    title:"success"}
+  );
   res.redirect("/login");
 }
 
@@ -99,6 +119,7 @@ async function renderProjectDetail(req, res) {
 async function addProject(req, res) {
   console.log("form submited");
 
+  let {user} =req.session
   const { title, content, start, end, icon } = req.body;
   console.log("ini body:", req.body);
   const blind = {};
@@ -128,8 +149,15 @@ async function addProject(req, res) {
     end,
     duration,
     icons: icons,
+    user_id:user.id 
   });
-
+  
+  console.log("test result:" ,result)
+  req.flash("message", {
+    text:"project added",
+    icon:"success",
+    title:"success"}
+  );
   res.redirect("/MyProject");
 }
 
