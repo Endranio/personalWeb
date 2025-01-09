@@ -48,6 +48,7 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use("/assets", express.static(path.join(__dirname, "/assets")));
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(methodOverride("_method"));
 
 
@@ -87,7 +88,7 @@ app.post("/add-project",upload.single('image'), addProject);
 app.post("/register", authRegister);
 app.post("/login", authLogin);
 app.get("/my-project-edit/:id", renderMyProjectEdit);
-app.patch("/project-update/:id", updateProject);
+app.patch("/project-update/:id",upload.single('image'), updateProject);
 app.delete("/blog-delete/:id", deleteProject);
 
 app.listen(port, () => {

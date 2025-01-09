@@ -3,7 +3,7 @@
 
     <section class="Project-form">
 
-      <form action="/project-update/{{data.id}}?_method=PATCH" method="post" class="form">
+      <form action="/project-update/{{data.id}}?_method=PATCH" method="post" class="form" enctype="multipart/form-data">
         <h1 class="section title">Edit Project</h1>
         <div class="a">
           <label for="title">Project Name</label>
@@ -94,28 +94,23 @@
               TypeScript</label
             >
           </div>
-        </div>
+        </div> 
 
-        <div class="a">
-          <label for="input-project-image">Upload Image</label>
-          <div class="input-project-image-group">
-            <label for="input-project-image">
-                <p>Attach File</p>
-                <img src="../assets/img/file.png" alt="">
-                </label>
-            <input
-              placeholder="Project image"
-              type="file"
-              name="input-project-image"
-              id="input-project-image"
-              
-              hidden
-            />
-          </div>
-        </div>
+        <div class="form-field mt-4 mb-5">
+        <label for="image" class="form-label"></label>
+        <input id="image" name="image" class="form-control"  type="file">
+      </div>
+ 
+<div class="">
+        {{!-- <p id="preview">{{data.image}}</p> --}}
+        <img id="preview" src="{{data.image}}"  class="img-thumbnail" style="max-height: 300px;">
+      </div>
+
         <div class="button">
             <button class="btn" type="submit">Save</button>
           </div>
       </form>
     </section>
+
+    <script src="/assets/JS/image-preview.js"></script>
     {{/layout}}
