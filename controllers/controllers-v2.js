@@ -258,12 +258,17 @@ async function deleteProject(req, res) {
   return res.redirect("/Myproject")
   }
 
-  
-  req.flash("option",{
-    text:"You won't be able to revert this!"
-  })
+  // if(result.user_id == user.id){
+
+  //   req.flash("option",{
+  //     text:"You won't be able to revert this!"
+  //   })
+  // }
   await Blog.destroy({ where: { id } })
-  
+  req.flash("message", {
+    title: "Success",
+    text: "project deleted",
+    icon: "success",})
   return res.redirect("/MyProject");
 }
 

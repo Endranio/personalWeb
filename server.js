@@ -28,7 +28,7 @@ const { Time, getRelativeTime} = require("./utils/time");
 const { truncateText } = require("./utils/text");
 const {isChecked}= require("./utils/checkbox");
  const { sendAlert,sendAlertOption } = require("./assets/JS/sw2");
-
+const {upload}= require("./middlewares/upload-files")
 
 
 const app = express();
@@ -66,9 +66,9 @@ hbs.registerHelper("equal", function (a, b) {
 hbs.registerHelper("sendAlert", (messages) => {
   return new hbs.SafeString(sendAlert(messages));
 });
-hbs.registerHelper("sendAlertOption", (messages) => {
-  return new hbs.SafeString(sendAlertOption(messages));
-});
+// hbs.registerHelper("sendAlertOption", (messages) => {
+//   return new hbs.SafeString(sendAlertOption(messages));
+// });
 
 
 app.get("/index", renderHome);
@@ -83,7 +83,7 @@ app.get("/task-form", renderContact);
 app.get("/my-project-add", renderMyProjectAdd);
 app.get("/projectDetail/:id", renderProjectDetail);
 app.get("/MyProject", renderProject);
-app.post("/add-project", addProject);
+app.post("/add-project",upload.single('image'), addProject);
 app.post("/register", authRegister);
 app.post("/login", authLogin);
 app.get("/my-project-edit/:id", renderMyProjectEdit);

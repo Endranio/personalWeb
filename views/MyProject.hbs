@@ -2,9 +2,9 @@
 {{#if messages.message}}
 {{{sendAlert messages}}}
 {{/if}}
-{{#if messages.option}}
-{{{sendAlertOption option}}}
-{{/if}}
+{{!-- {{#if messages.option}}
+{{{sendAlertOption messages}}}
+{{/if}} --}}
 
 <div class="background-project">
 
@@ -42,7 +42,7 @@
                         <a class="btn btn-edit" href="/my-project-edit/{{this.id}}">Edit</a>
                         
                       <form action="/blog-delete/{{this.id}}?_method=DELETE" method="post">
-                        <button class="btn btn-delete" type="button" onclick="confirmDelete">Delete</button>
+                        <button class="btn btn-delete" type="submit" >Delete</button>
                       </form>
                     </div>
                   </div>
@@ -55,5 +55,4 @@
         </div>
     </section>
 </div>
-    
    {{/layout}}
