@@ -8,7 +8,7 @@ const saltRounds = 10;
 function renderHome(req, res) {
   const user = req.session.user;
 
-  res.render("index", { user, isHome: true });
+  res.render("/", { user, isHome: true });
 }
 
 function renderContact(req, res) {
@@ -123,7 +123,7 @@ if(!email || !password){
     icon: "success",
     title: "success",
   });
-  res.redirect("/index");
+  res.redirect("/ind");
 }
 
 function authLogout(req, res) {
