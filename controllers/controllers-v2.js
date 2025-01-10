@@ -1,14 +1,14 @@
 const { Sequelize, QueryTypes, where,Op } = require("sequelize");
 const bcrypt = require("bcrypt");
-const config = require("../config/config.json");
+const config = require("../config/config.js");
 const { Blog, User } = require("../models");
-const sequelize = new Sequelize(config.development);
+const sequelize = new Sequelize(config[environtment]);
 const saltRounds = 10;
 
 function renderHome(req, res) {
   const user = req.session.user;
 
-  res.render("/", { user, isHome: true });
+  res.render("index", { user, isHome: true });
 }
 
 function renderContact(req, res) {
@@ -123,7 +123,7 @@ if(!email || !password){
     icon: "success",
     title: "success",
   });
-  res.redirect("/ind");
+  res.redirect("/index");
 }
 
 function authLogout(req, res) {
@@ -189,6 +189,8 @@ async function addProject(req, res) {
   let { user } = req.session;
   const { title, content, start, end, icon } = req.body;
   console.log("ini body:", req.body);
+  const image = "http://localhost:3000/" + req.file.path;
+ 
   const blind = {};
   blind["title"] = title;
   blind["content"] = content;
@@ -206,7 +208,6 @@ async function addProject(req, res) {
     duration = `${durationInDay} Day${durationInDay > 1 ? "s" : ""}`;
   }
 
-  const image = "http://localhost:3000/" + req.file.path;
 
   const result = await Blog.create({
     title: blind["title"],
@@ -257,6 +258,9 @@ async function updateProject(req, res) {
   const { user } = req.session;
   const { title, content, start, end, icon } = req.body;
   const icons = Array.isArray(icon) ? icon : [icon];
+  const blind ={}
+  blind["title"] = title;
+  blind["content"] = content;
   let durationInMonth = Math.floor(
     (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24 * 30)
   );
@@ -276,8 +280,8 @@ async function updateProject(req, res) {
   }
   await Blog.update(
     {
-      title: title,
-      content: content,
+      title: blind["title"],
+      content:blind["content"],
       image: image,
       start: start,
       end: end,

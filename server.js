@@ -4,7 +4,6 @@ var flash = require("express-flash")
 var session = require("express-session");
 const path = require("path");
 const hbs = require("hbs");
-require("dotenv").config();
 
 const {
   renderLogin,
@@ -33,6 +32,9 @@ const {upload}= require("./middlewares/upload-files")
 
 const app = express();
 const port = process.env.SERVER_PORT;
+require("dotenv").config();
+const environtment = process.env.NODE_ENV;
+const sequelize = new Sequelize(config[environtment]);
 
 app.use(express.json());
 app.use(flash())
@@ -67,12 +69,10 @@ hbs.registerHelper("equal", function (a, b) {
 hbs.registerHelper("sendAlert", (messages) => {
   return new hbs.SafeString(sendAlert(messages));
 });
-// hbs.registerHelper("sendAlertOption", (messages) => {
-//   return new hbs.SafeString(sendAlertOption(messages));
-// });
 
 
-app.get("/", renderHome);
+
+app.get("/index", renderHome);
 app.get("/register", renderRegister);
 app.get("/login", renderLogin);
 app.get("/logout", authLogout);

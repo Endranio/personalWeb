@@ -19,21 +19,21 @@
 var contactForm = document.getElementById("contactForm");
 
 contactForm.addEventListener("submit", (e) => {
-  e.preventDefault(); // Mencegah pengiriman form default
+  e.preventDefault(); 
 
-  // Ambil data dari form
+  
   var form = e.target;
   var formData = new FormData(form);
   var data = Object.fromEntries(formData.entries());
 
-  // Tampilkan SweetAlert2 dengan satu tombol
+ 
   Swal.fire({
     title: "Email Sent",
     text: `Thank you, ${data.name}! Your email has been sent successfully.`,
     icon: "success",
     confirmButtonText: "OK",
   }).then(() => {
-    // Buat link mailto dan trigger
+    
     var link = document.createElement("a");
     link.href = `mailto:endranio576@gmail.com?subject=${encodeURIComponent(
       data.Subject

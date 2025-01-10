@@ -10,7 +10,7 @@
 
     <section class="project-list">
 
-        <h1 >My Project</h1>
+        <h1 >Project</h1>
       
         <br><br>
         {{#if user}}
@@ -38,12 +38,13 @@
                     </div>
     
                     <div class="button-card">
-                     
+                     {{#if (equal ../user.id this.user_id)}}
                         <a class="btn btn-edit" href="/my-project-edit/{{this.id}}">Edit</a>
                         
                       <form action="/blog-delete/{{this.id}}?_method=DELETE" method="post">
                         <button class="btn btn-delete" type="submit" >Delete</button>
                       </form>
+                    {{/if}}
                     </div>
                   </div>
         </div>
