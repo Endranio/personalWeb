@@ -32,7 +32,7 @@ const {upload}= require("./middlewares/upload-files")
 
 const app = express();
 require("dotenv").config();
-const port = process.env.NODE_ENV;
+const PORT = process.env.PORT;
 // const environtment = process.env.NODE_ENV;
 // const sequelize = new Sequelize(config[environtment]);
 
@@ -89,7 +89,8 @@ app.get("/my-project-edit/:id", renderMyProjectEdit);
 app.patch("/project-update/:id",upload.single('image'), updateProject);
 app.delete("/blog-delete/:id", deleteProject);
 
-app.listen(port, () => {
-  console.log(`server berjalan di port${port}`);
+app.listen(PORT, () => {
+  console.log(`server berjalan di port${PORT}`);
   // console.log(`test dotenv ${process.env.URL_TEST}`);
 }); 
+

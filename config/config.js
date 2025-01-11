@@ -10,11 +10,11 @@ module.exports={
     database: process.env.POSTGRESS_DATABASE,
     host: process.env.POSTGRESS_HOST,
     dialect: "postgres",
-    dialecModule:pg,
+    dialectModule:pg,
     dialectOptions:{
       ssl:{
         require:true,
-        rejectUnauthorizet:false
+        rejectUnauthorized:false
       }
     }
   },
@@ -29,7 +29,7 @@ module.exports={
     dialectOptions:{
       ssl:{
         require:true,
-        rejectUnauthorizet:false
+        rejectUnauthorized:false
       }
     }
   },
