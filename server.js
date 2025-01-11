@@ -34,7 +34,7 @@ const app = express();
 const port = process.env.SERVER_PORT;
 require("dotenv").config();
 const environtment = process.env.NODE_ENV;
-const sequelize = new Sequelize(config[environtment]);
+// const sequelize = new Sequelize(config[environtment]);
 
 app.use(express.json());
 app.use(flash())
