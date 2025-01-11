@@ -70,7 +70,7 @@ hbs.registerHelper("sendAlert", (messages) => {
 
 
 
-app.get("/index", renderHome);
+app.get("/", renderHome);
 app.get("/register", renderRegister);
 app.get("/login", renderLogin);
 app.get("/logout", authLogout);

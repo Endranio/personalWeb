@@ -125,7 +125,7 @@ if(!email || !password){
     icon: "success",
     title: "success",
   });
-  res.redirect("/index");
+  res.redirect("/");
 }
 
 function authLogout(req, res) {
