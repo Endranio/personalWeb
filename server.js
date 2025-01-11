@@ -39,14 +39,12 @@ const port = process.env.NODE_ENV;
 app.use(express.json());
 app.use(flash())
 
-app.use(
-  session({
-    name: "endra",
-    secret: process.env.SESSION_KEY,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+app.use(session({
+  secret: process.env.SESSION_KEY,
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 app.use(express.urlencoded({ extended: true }));
 app.use("/assets", express.static(path.join(__dirname, "/assets")));
@@ -94,4 +92,4 @@ app.delete("/blog-delete/:id", deleteProject);
 app.listen(port, () => {
   console.log(`server berjalan di port${port}`);
   // console.log(`test dotenv ${process.env.URL_TEST}`);
-});
+}); 
