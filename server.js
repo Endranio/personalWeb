@@ -1,9 +1,10 @@
+
 const express = require("express");
 var methodOverride = require("method-override");
 var flash = require("express-flash")
 var session = require("express-session");
 const path = require("path");
-const hbs = require("hbs");
+const hbs = require("hbs"); 
 
 const {
   renderLogin,
@@ -29,10 +30,11 @@ const {isChecked}= require("./utils/checkbox");
  const { sendAlert,sendAlertOption } = require("./assets/JS/sw2");
 const {upload}= require("./middlewares/upload-files")
 
-
+ 
 const app = express();
 require("dotenv").config();
-const PORT = process.env.PORT;
+
+const PORT = process.env.PORT || 3000;
 // const environtment = process.env.NODE_ENV;
 // const sequelize = new Sequelize(config[environtment]);
 

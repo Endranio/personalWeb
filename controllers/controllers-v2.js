@@ -1,11 +1,10 @@
+require("dotenv").config();
 const { Sequelize, QueryTypes, where,Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const config = require("../config/config.js");
 const { Blog, User } = require("../models");
-require("dotenv").config();
+require("dotenv").config(); 
 const environtment = process.env.NODE_ENV
-console.log("testtt :", environtment)
- 
 const sequelize = new Sequelize(config[environtment]);
 const saltRounds = 10;
 
