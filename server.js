@@ -89,7 +89,7 @@ app.get("/my-project-edit/:id", renderMyProjectEdit);
 app.patch("/project-update/:id",upload.single('image'), updateProject);
 app.delete("/blog-delete/:id", deleteProject);
 
-// app.listen(port, () => {
+app.listen(port, () => {
   console.log(`server berjalan di port${port}`);
   // console.log(`test dotenv ${process.env.URL_TEST}`);
-// }); 
+}); 
